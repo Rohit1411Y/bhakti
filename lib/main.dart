@@ -1,4 +1,5 @@
 import 'package:bhakti/login_page.dart';
+import 'package:bhakti/verify_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
 
-         inputDecorationTheme: InputDecorationTheme(
+         inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(
            borderSide: BorderSide(color: Colors.pink)
         )

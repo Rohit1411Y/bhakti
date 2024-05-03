@@ -1,3 +1,4 @@
+import 'package:bhakti/verify_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -156,27 +157,32 @@ class LoginPage extends StatelessWidget {
                             ),
                             Align(
                                  alignment: Alignment.centerRight,
-                                child: Container(
-                                  height: 40,
-                                  width: 180,
-                                  decoration: BoxDecoration(
-                                    gradient:const LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [Colors.yellow, Colors.orange]),
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  child: const Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.min,
-                                  
-                                    children: <Widget>[
-                                      Text('Generate',
-                                      style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                                     SizedBox(width: 5),
-                                      Icon(Icons.arrow_forward,color: Colors.white,),
-                                     
-                                    ],
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> VerifyScreen(mobileNo: mobileController.text.toString())));
+                                  },
+                                  child: Container(
+                                    height: 40,
+                                    width: 180,
+                                    decoration: BoxDecoration(
+                                      gradient:const LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: [Colors.yellow, Colors.orange]),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    child: const Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                    
+                                      children: <Widget>[
+                                        Text('Generate',
+                                        style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                                       SizedBox(width: 5),
+                                        Icon(Icons.arrow_forward,color: Colors.white,),
+                                       
+                                      ],
+                                    ),
                                   ),
                                 ),
                               

@@ -1,11 +1,14 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
 class VerifyScreen extends StatelessWidget {
-  const VerifyScreen({super.key});
+   String mobileNo;
+   VerifyScreen({super.key,required this.mobileNo});
   
   @override
   Widget build(BuildContext context) {
-    TextEditingController mobileController = TextEditingController();
+   
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
@@ -47,7 +50,7 @@ class VerifyScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             const Text(
-                              'Enter Mobile Number',
+                              'Enter 4 digit verification',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -55,102 +58,52 @@ class VerifyScreen extends StatelessWidget {
                               textAlign: TextAlign.left,
                             ),
                             const SizedBox(height: 5),
-                            const Text(
-                              'We will send you 4 digit verification code to register mobile number',
-                              style: TextStyle(color: Colors.grey,fontSize: 12),
-                              textAlign: TextAlign.left,
+                            // const Text(
+                            //   'Please enter the 4 digit verification code received on ${'+919982317865'}. Wrong Number?',
+                            //   style: TextStyle(color: Colors.grey,fontSize: 12),
+                            //   textAlign: TextAlign.left,
+                            // ),
+                            RichText(text:   TextSpan(
+                              text: 'Please enter the 4 digit verification code received\non $mobileNo.',
+
+                              style:const TextStyle(color: Colors.grey,fontSize: 12),
+                              children:<TextSpan>[
+                                TextSpan(text: "Wrong Number?",style: const TextStyle(fontWeight: FontWeight.bold,color: Color.fromARGB(136, 0, 0, 0)),
+                                recognizer: TapGestureRecognizer()..onTap = () => Navigator.pop(context),)
+                              ]
+                              
+                            )
                             ),
                             const SizedBox(height: 20),
-                             Row(
-                              children: [
-                               
-                               const  Expanded(
-                                  flex: 1,
-                                  child: TextField(
-                                    textAlign: TextAlign.center,
-                                    readOnly: true,
-                                    decoration: InputDecoration(
-                                      contentPadding:
-                                          EdgeInsets.symmetric(horizontal: 1),
-                                      hintText: '+91',
-                                      hintStyle: TextStyle(
-                                          fontSize: 24,
-                                          color: Colors.orange),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(4)),
-                                        borderSide: BorderSide(
-                                            width: 1, color: Colors.orange),
-                                      ),
-                                      disabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(4)),
-                                        borderSide: BorderSide(
-                                            width: 1, color: Colors.orange),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(4)),
-                                        borderSide: BorderSide(
-                                            width: 1, color: Colors.orange),
-                                      ),
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(4)),
-                                          borderSide: BorderSide(
-                                            width: 1,
-                                          )),
-                                    ),
-                                  ),
-                                ),
-                               const  SizedBox(
-                                    width:
-                                        8),
-                                
-                                Expanded(
-                                  flex: 5,
-                                  child: TextField(
-                                    controller: mobileController,
-                                      textAlign: TextAlign.center,
-                                      keyboardType: TextInputType.phone,
-                                      maxLength: 10,
-                                      cursorHeight: 30,
-                                      style:const  TextStyle(height: 1, fontSize: 30,color: Colors.orange),
-                                     
-                                      decoration: const InputDecoration(
-                                        counterText: "",
-                                       
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 1, horizontal: 5),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(4)),
-                                          borderSide: BorderSide(
-                                              width: 1, color: Colors.orange),
-                                        ),
-                                        disabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(4)),
-                                          borderSide: BorderSide(
-                                              width: 1, color: Colors.orange),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(4)),
-                                          borderSide: BorderSide(
-                                              width: 1, color: Colors.orange),
-                                        ),
-                                        border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(4)),
-                                            borderSide: BorderSide(
-                                              width: 1,
-                                            )),
-                                      
-                                      )),
-                                ),
-                              ],
-                            ),
+                          
+
+                           OtpTextField(
+              numberOfFields: 4,
+              showFieldAsBox: true,
+              fieldWidth: 55,
+              fieldHeight: 55,
+          
+              
+             margin: const EdgeInsets.all(14),
+              borderWidth: 2,
+              disabledBorderColor: Colors.orange,
+              enabledBorderColor: Colors.orange,
+              focusedBorderColor: Colors.orange,
+              borderColor: Colors.orange,
+              cursorColor: Colors.orange,
+              borderRadius: BorderRadius.circular(8),
+              onCodeChanged: (pin) {
+                // Handle OTP value change
+              },
+              onSubmit: (pin) {
+                // Handle OTP verification
+              },
+            ),
+
+
+
+
+
                             const SizedBox(
                               height: 20,
                             ),
@@ -171,7 +124,7 @@ class VerifyScreen extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                   
                                     children: <Widget>[
-                                      Text('Generate',
+                                      Text('Verify',
                                       style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                                      SizedBox(width: 5),
                                       Icon(Icons.arrow_forward,color: Colors.white,),
@@ -188,7 +141,7 @@ class VerifyScreen extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        top: 160,
+                        top: 180,
                         right: 240,
                         child: Image.asset('assets/images/pattern2.jpeg'),
                       ),
